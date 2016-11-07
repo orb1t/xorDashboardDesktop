@@ -4,8 +4,8 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
 import eu.hansolo.steelseries.gauges.AbstractGauge;
-import orTestStandDesktop.ui.DashboardEditor.Blocks.orGfxCanvas;
-import orTestStandDesktop.ui.helpers.ImageUtils;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.orGfxCanvas;
+import xorDashboardDesktop.ui.helpers.ImageUtils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Random;
 
-import static orTestStandDesktop.ui.MainForm.tableModel;
+import static xorDashboardDesktop.ui.MainForm.tableModel;
 
 public class testDlg extends JDialog {
 	private final testDlg me;
