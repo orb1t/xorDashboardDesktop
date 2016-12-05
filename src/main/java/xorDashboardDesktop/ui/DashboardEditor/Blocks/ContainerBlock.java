@@ -4,7 +4,7 @@ import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.AbstractBlock;
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.EBlockType;
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ImagePanel;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentWrapper;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 
 import java.io.Serializable;
 

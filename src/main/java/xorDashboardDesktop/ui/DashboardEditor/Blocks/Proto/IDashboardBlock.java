@@ -2,7 +2,7 @@ package xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto;
 
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentWrapper;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 
 import javax.swing.*;
 import java.io.Serializable;

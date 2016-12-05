@@ -35,7 +35,7 @@ public class orGfxCanvas extends JPanel implements Serializable , TableModelList
   // Multi Values Graph params
   public java.util.List<Integer> DRW_IDXs = new ArrayList<>();  // TableModel desired Columns list
   private Map<Integer, Boolean> updateFlag = new HashMap<Integer, Boolean>();
-  private Map<Integer, java.util.List<Point>> graphPoints = new HashMap<Integer, java.util.List<Point>>();
+  private Map<Integer, ArrayList<Object>> graphPoints = new HashMap<>(  ); //HashMap<K, V>();
   // Scale Factors - own couple for each Data Column
   private Map<Integer, Float> xScale = new HashMap<Integer, Float>();
   private Map<Integer, Float> yScale = new HashMap<Integer, Float>();

@@ -30,14 +30,14 @@ public class LabelBlockIndicator extends AbstractBlockIndicator  implements Seri
     return def;
   }
 
-  public LabelBlockIndicator ( ControlProperties uiProperties ) {
+/*  public LabelBlockIndicator ( ControlProperties uiProperties ) {
     super(uiProperties);
     if (null == uiProperties )
       uiProperties = this.getDefaultProperties();
 	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, String.valueOf( MainForm.tableModel.getHeaders().size()) ) );
 
 createInnerComponent();
-  }
+  }*/
 
 	@Override
 	public void createInnerComponent () {

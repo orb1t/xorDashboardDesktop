@@ -1,4 +1,4 @@
-package xorDashboardDesktop.ui.DashboardEditor.ResizableComponent;
+package xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

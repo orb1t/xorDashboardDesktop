@@ -33,14 +33,14 @@ public class LinearBargraphBlockIndicator extends AbstractBlockIndicator impleme
     return def;
   }
 
-  public LinearBargraphBlockIndicator ( ControlProperties uiProperties ) {
+  /*public LinearBargraphBlockIndicator ( ControlProperties uiProperties ) {
     super(uiProperties);
     if (null == uiProperties )
       uiProperties = this.getDefaultProperties();
 	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "5" ));//String.valueOf( MainForm.tableModel.getHeaders().size()) ) );
 
 	  createInnerComponent();
-  }
+  }*/
 
 	@Override
 	public void createInnerComponent () {

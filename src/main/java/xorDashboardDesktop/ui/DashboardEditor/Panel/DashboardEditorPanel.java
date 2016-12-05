@@ -11,8 +11,8 @@ import xorDashboardDesktop.ui.DashboardEditor.Blocks.orGfxCanvas;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlPropertiesDialog.ControlPropertiesDialog;
 import xorDashboardDesktop.ui.DashboardEditor.ControlPropertiesDialog.IAddBlockDialogResults;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentMouseInputAdapter;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentWrapper;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentMouseInputAdapter;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 import xorDashboardDesktop.ui.MainForm;
 
 import javax.swing.*;
@@ -254,6 +254,8 @@ public class DashboardEditorPanel extends JPanel implements Serializable, IEdito
 	  tmp.add(new AddComponentAction("ContainerSplitBlock") { });
 	  tmp.add(new AddComponentAction("ButtonBlock") { });
 	  tmp.add(new AddComponentAction("ButtonBlockComander") { });
+	  tmp.add(new AddComponentAction("SliderBlockComander") { });
+	  tmp.add(new AddComponentAction("SliderBlock") { });
 	  tmp.add(new AddComponentAction("LabelBlock") { });
 	  tmp.add(new AddComponentAction("LabelBlockIndicator") { });
 	  tmpMenu.add( tmp );

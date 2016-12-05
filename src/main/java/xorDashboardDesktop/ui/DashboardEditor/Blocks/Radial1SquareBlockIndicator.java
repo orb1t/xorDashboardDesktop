@@ -32,14 +32,14 @@ public class Radial1SquareBlockIndicator extends AbstractBlockIndicator implemen
     return def;
   }
 
-  public Radial1SquareBlockIndicator ( ControlProperties uiProperties ) {
+  /*public Radial1SquareBlockIndicator ( ControlProperties uiProperties ) {
     super(uiProperties);
     if (null == uiProperties )
       uiProperties = this.getDefaultProperties();
 	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "5" ));//String.valueOf( MainForm.tableModel.getHeaders().size()) ) );
 
 	  createInnerComponent();
-  }
+  }*/
 
 	@Override
 	public void createInnerComponent () {

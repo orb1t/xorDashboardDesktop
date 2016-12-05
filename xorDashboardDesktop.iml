@@ -10,12 +10,13 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="module" module-name="SteelSeries" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="forms_rt" level="project" />
     <orderEntry type="library" name="RXTXcomm" level="project" />
     <orderEntry type="library" name="trident-6.3" level="project" />
     <orderEntry type="library" name="G" level="project" />
     <orderEntry type="library" name="nicenumbers" level="project" />
+    <orderEntry type="module" module-name="SteelSeries" />
+    <orderEntry type="library" name="Maven: com.github.insubstantial:trident:6.3" level="project" />
   </component>
 </module>

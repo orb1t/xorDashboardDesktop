@@ -4,8 +4,8 @@ import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertie
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.EControlPropertyItemType;
 import xorDashboardDesktop.ui.DashboardEditor.Panel.IEditorComponentsTreeNode;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableBorder;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentWrapper;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableBorder;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 
 import javax.swing.*;
 import javax.swing.border.Border;

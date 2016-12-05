@@ -35,49 +35,6 @@ public class Graph2dPlotBlockIndicator extends AbstractBlockIndicator  implement
   }
 
 
-
-  public Graph2dPlotBlockIndicator ( ControlProperties uiProperties ) {
-    super(uiProperties);
-    if (null == uiProperties )
-      uiProperties = this.getDefaultProperties();
-
-	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "11" ));//String.valueOf( MainForm.tableModel.getHeaders().size()) ) );
-
-	  ControlPropertyItem res = new ControlPropertyItem( "Count", EControlPropertyItemType.LST, "2;1;2;" );
-	  controlProperties.setProperty( res );
-
-	  res = new ControlPropertyItem( "Title1", EControlPropertyItemType.STR, "graph1" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Color1", EControlPropertyItemType.STR, "Color.RED" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Max Val1", EControlPropertyItemType.FLT, "1000" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Min Val1", EControlPropertyItemType.FLT, "0" );
-	  controlProperties.setProperty( res );
-	  String valList = MainForm.tableModel.getHeaders().get( 0 ) + ";";
-	  for ( int i = 0; i < MainForm.tableModel.getHeaders().size(); i++ ){ // Integer.parseInt(  uiProperties.getPropertyValue( "ControlPropertiesMax" ) ); i++ ){
-		  valList += /*i*/ MainForm.tableModel.getHeaders().get( i ) + ";";
-	  }
-	  res = new ControlPropertyItem( "pktTableSourceColumn1", EControlPropertyItemType.LST, valList );
-	  controlProperties.setProperty( res );
-
-	  res = new ControlPropertyItem( "Title2", EControlPropertyItemType.STR, "graph2" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Color2", EControlPropertyItemType.STR, "Color.GREEN" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Max Val2", EControlPropertyItemType.FLT, "1000" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "Min Val2", EControlPropertyItemType.FLT, "0" );
-	  controlProperties.setProperty( res );
-	  res = new ControlPropertyItem( "pktTableSourceColumn2", EControlPropertyItemType.LST, valList );
-	  controlProperties.setProperty( res );
-
-
-
-//	  setInnerComponent ( gauge );//new JTextArea( uiProperties.getPropertyValue("Title")) );
-	  MainForm.tableModel.addTableModelListener( this );
-  }
-
 	@Override
 	public void createInnerComponent () {
 //		super.createInnerComponent();

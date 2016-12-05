@@ -5,7 +5,7 @@ import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.EBlockType;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.EControlPropertyItemType;
-import xorDashboardDesktop.ui.DashboardEditor.ResizableComponent.ResizableComponentWrapper;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

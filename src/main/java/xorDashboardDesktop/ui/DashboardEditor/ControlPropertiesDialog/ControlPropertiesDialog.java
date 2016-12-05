@@ -71,7 +71,7 @@ public class ControlPropertiesDialog extends JDialog {
 		d.height = 350;
 		propertiesTable.setPreferredScrollableViewportSize( d );
 		propertiesTable.setPreferredScrollableViewportSize( new Dimension( 400, 300 ) );
-		pack();
+//		pack();
 
 		if ( propsBlock instanceof IDashboardBlockIndicator || propsBlock instanceof IDashboardBlockComander ) {
 			rm = new RowEditorModel();
@@ -95,7 +95,7 @@ public class ControlPropertiesDialog extends JDialog {
 			controlPropertiesTable.setPreferredScrollableViewportSize( new Dimension( 400, 300 ) );
 			controlPropertiesTable.setVisible( true );
 
-			pack();
+//			pack();
 		}
 
 		$$$setupUI$$$();
