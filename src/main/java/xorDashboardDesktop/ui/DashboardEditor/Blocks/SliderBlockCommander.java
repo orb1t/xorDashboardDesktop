@@ -18,7 +18,7 @@ import java.io.Serializable;
 /**
  * Created by orb1t_ua on 08.10.16.
  */
-public class SliderBlock extends AbstractBlockIndicator implements Serializable {
+public class SliderBlockCommander extends AbstractBlockIndicator implements Serializable {
 
 
 
@@ -39,9 +39,9 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
     ControlProperties def;
     def = super.getDefaultProperties();
 
-    def.setPropertyValue ( "Name", "SliderBlock#"+instancesCount );
-    def.setPropertyValue ( "componentClassName", "SliderBlock" );
-    def.setPropertyValue ( "Title", "SliderBlockTitle" );
+    def.setPropertyValue ( "Name", "SliderCommander#"+instancesCount );
+    def.setPropertyValue ( "componentClassName", "SliderBlockCommander" );
+    def.setPropertyValue ( "Title", "SliderCommander" );
     def.setPropertyValue ( "Border", "false" );
 
 	  def.setPropertyValue( "ControlPropertiesMax", "5" );
@@ -53,12 +53,9 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 	@Override
 	public void createInnerComponent () {
 		super.createInnerComponent();
-//		slider = new Slider(uiProperties);
-//		setInnerComponent ( slider );
 
 		sliderPanel = new JPanel();
 		sliderPanel.setLayout( new GridLayoutManager( 3, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
-
 		lbValue = new JLabel();
 		sliderPanel.add( lbValue, new GridConstraints( 2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension( -1, 16 ), new Dimension( -1, 16 ), null, 0, false ) );
 		lbTitle = new JLabel();
@@ -66,31 +63,24 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 		slider = new JSlider();
 		sliderPanel.add( slider, new GridConstraints( 1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension( -1, 64 ), new Dimension( -1, 64 ), null, 1, false ) );
 
-
-
 		slider.addChangeListener( new ChangeListener() {
 			public void stateChanged ( ChangeEvent e ) {
 				JSlider source = (JSlider) e.getSource();
 				int value = (int) source.getValue();
 				lbValue.setText( "Value : " + value + " " + unitString );
-//				if ( ( controlProperties.getProperties().size() > 0 ) && ( controlProperties.getPropertyValue("Command") != "0" ) ) {
 					System.out.println( "ChangeEvent = [ " + controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) + " ]\n" + e );
 //					// TODO: write this.controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) to Serial!
-//				}
 			}
 		} );
-
-
-
 		MainForm.tableModel.addTableModelListener( this );
 	}
 
 
-	public SliderBlock () {
+	public SliderBlockCommander () {
     super(new ControlProperties());
 
     uiProperties = this.getDefaultProperties();
-	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "5" ));//String.valueOf( MainForm.tableModel.getHeaders().size()) ) );
+	  uiProperties.setProperty( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "5" ));
 
 
 		ControlPropertyItem res = new ControlPropertyItem( "MinVal", EControlPropertyItemType.FLT, "0" );
@@ -107,8 +97,8 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 		controlProperties.setProperty( res );
 
 	String valList = MainForm.tableModel.getHeaders().get( 0 ) + ";";
-	for ( int i = 0; i < MainForm.tableModel.getHeaders().size(); i++ ){ // Integer.parseInt(  uiProperties.getPropertyValue( "ControlPropertiesMax" ) ); i++ ){
-		valList += /*i*/ MainForm.tableModel.getHeaders().get( i ) + ";";
+	for ( int i = 0; i < MainForm.tableModel.getHeaders().size(); i++ ){
+		valList += MainForm.tableModel.getHeaders().get( i ) + ";";
 	}
 	res = new ControlPropertyItem( "pktTableSourceColumn", EControlPropertyItemType.LST, valList );
 	controlProperties.setProperty( res );
@@ -120,7 +110,7 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 		applyControlProperties ();
 //		applyUiProperties();
 
-		setInnerComponent ( sliderPanel );//new JSlider( uiProperties.getPropertyValue("Title")) );
+		setInnerComponent ( sliderPanel );
   }
 
 
@@ -128,7 +118,6 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 	public void tableChanged ( TableModelEvent tableModelEvent ) {
 		if ( null != slider ) {
 			double tmp = Double.valueOf( MainForm.tableModel.values.get( MainForm.tableModel.values.size() - 1 ).get( MainForm.tableModel.getHeaders().indexOf( controlProperties.getProperties().get( 5 ).getValue() ) ).toString() );
-//			if ( sliderLastVal != tmp ) {
 			if ( ( tmp >=  sliderLastVal + 5 ) || ( tmp < sliderLastVal - 5 )  ){
 				sliderLastVal = slider.getValue();
 				slider.setValue( (int) tmp );
@@ -153,7 +142,6 @@ public class SliderBlock extends AbstractBlockIndicator implements Serializable 
 
 		slider.setMinimum( Float.valueOf( controlProperties.getPropertyValue( "MinVal" ) ).intValue() );
 		slider.setMaximum( Float.valueOf( controlProperties.getPropertyValue( "MaxVal" ) ).intValue() );
-//		slider.setValue( Float.valueOf( controlProperties.getPropertyValue( "DefVal" ) ).intValue() );
 
 		lbTitle.setText( uiProperties.getPropertyValue( "Title" ) );
 		lbValue.setText( "Value : " + slider.getValue() + " "  + unitString );

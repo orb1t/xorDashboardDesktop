@@ -37,12 +37,9 @@ public class ButtonBlockComander extends AbstractBlockComander  implements Seria
     if (null == uiProperties )
       uiProperties = this.getDefaultProperties();
 
-
-
-	  uiProperties.setPropertyValue( "ControlPropertiesMax", "-1" ); //Property( new ControlPropertyItem( "ControlPropertiesMax", EControlPropertyItemType.SYS, "-1" ) );
+	  uiProperties.setPropertyValue( "ControlPropertiesMax", "-1" );
 
 	  createInnerComponent ();
-
   }
 
   @Override

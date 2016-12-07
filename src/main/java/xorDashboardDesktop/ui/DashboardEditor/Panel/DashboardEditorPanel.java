@@ -207,9 +207,7 @@ public class DashboardEditorPanel extends JPanel implements Serializable, IEdito
 					          ( (AbstractBlock) tmp).setUiProperties(tmpProps);
 
 					          ControlPropertiesDialog dialog = new ControlPropertiesDialog( (AbstractBlock) tmp, new AddComponentAction( "EditBlock" ) {
-					          } );////(IAddBlockDialogResults) ME );
-//					          dialog.pack();
-//					          dialog.setVisible( true );
+					          } );
 				          }
 			          }
 		          }, 0 );
@@ -217,7 +215,6 @@ public class DashboardEditorPanel extends JPanel implements Serializable, IEdito
 
           }
           else {
-//	          addComponentPopup.remove( rmCurrentPopupItem );
 	          rmCurrentPopupItem.setVisible( false );
           }
           addComponentPopup.show(lastSelectedComponent, (int) (me.getX() + componentPnt.getX()), (int) (me.getY() + componentPnt.getY()));
@@ -231,33 +228,17 @@ public class DashboardEditorPanel extends JPanel implements Serializable, IEdito
     dashboardContainer = new ContainerBlock();
     configureDashboardContainer();
 
-//	  JPanel tmpCnt = new JPanel(  ) ;
-//	  tmpCnt.setSize( 300, 300 );
-//	  tmpCnt.setLocation( 250, 250 );
-//	  graphCanvas = new orGfxCanvas(MainForm.tableModel, orGfxCanvas.GRAPH_MODE_WINDOW, tmpCnt.getWidth(), tmpCnt.getHeight());
-//
-//	  graphCanvas.addColumntToGraph(0);
-////	  //this.graphCanvas.addMouseListener(this.graphCanvas);
-//
-//	  tmpCnt.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
-//	  tmpCnt.add(graphCanvas, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST/*ANCHOR_CENTER*/, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-//	  dashboardContainer.getInnerComponent().add(tmpCnt);//, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST/*ANCHOR_CENTER*/, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-
-
     resizableComponentsTree = new Tree<Component>(lastSelectedComponent);
-
-
 
 	  JMenu tmpMenu = new JMenu( "Add : " );
 	  JMenu tmp = new JMenu( "Native Controls" );
 	  tmp.add(new AddComponentAction("ContainerBlock") { });
 	  tmp.add(new AddComponentAction("ContainerSplitBlock") { });
-	  tmp.add(new AddComponentAction("ButtonBlock") { });
-	  tmp.add(new AddComponentAction("ButtonBlockComander") { });
-	  tmp.add(new AddComponentAction("SliderBlockComander") { });
-	  tmp.add(new AddComponentAction("SliderBlock") { });
 	  tmp.add(new AddComponentAction("LabelBlock") { });
 	  tmp.add(new AddComponentAction("LabelBlockIndicator") { });
+	  tmp.add(new AddComponentAction("ButtonBlockComander") { });
+	  tmp.add(new AddComponentAction("SliderBlockCommander") { });
+	  tmp.add(new AddComponentAction("RepeatingBlockCommander") { });
 	  tmpMenu.add( tmp );
 
 	  tmp = new JMenu( "Dashboard Controls" );
