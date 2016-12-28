@@ -1,7 +1,5 @@
 package xorDashboardDesktop.ui.DashboardEditor.Blocks;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.AbstractBlockIndicator;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
@@ -12,12 +10,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.TableModelEvent;
-import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.Serializable;
-import java.util.*;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import static xorDashboardDesktop.ui.MainForm.serial;
 
@@ -33,7 +30,7 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 	private JLabel lbCommand;
 	private JPanel commandPanel;
 	private RepeatingTimerTask repeatingTask;
-	private Timer repeatingTimer;
+	private transient Timer repeatingTimer;
 
 	private int cmdNumIdx = 0;
 	private int cmdNumOffset = 0;
@@ -41,7 +38,7 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 	private String unitString;
 	private int propNumIdx;
 
-	class RepeatingTimerTask extends TimerTask {
+	class RepeatingTimerTask extends TimerTask implements Serializable {
 		@Override
 		public void run () {
 //			System.out.println("working at fixed rate delay");
@@ -78,13 +75,14 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 		super.createInnerComponent();
 
 		repeaterPanel = new JPanel();
-		repeaterPanel.setLayout( new GridLayoutManager( 3, 3, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
+//		repeaterPanel.setLayout( new GridLayoutManager( 3, 3, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
 //		JRootPane contentPane = getRootPane();
+		repeaterPanel.setLayout( new BoxLayout(repeaterPanel, BoxLayout.Y_AXIS) );
 		add( repeaterPanel);//, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 1, false ) );
 
 		repeaterPanel.setBorder( BorderFactory.createTitledBorder( "repeaterPanel" ) );
 		spnrRepeaterFreq = new JSpinner();
-		repeaterPanel.add( spnrRepeaterFreq, new GridConstraints( 0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension( 128, -1 ), new Dimension( 128, -1 ), null, 0, false ) );
+		repeaterPanel.add( spnrRepeaterFreq );//, new GridConstraints( 0, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, new Dimension( 128, -1 ), new Dimension( 128, -1 ), null, 0, false ) );
 		cbRepeaterMode = new JComboBox();
 		final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
 		defaultComboBoxModel1.addElement( "Hz" );
@@ -94,16 +92,17 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 		defaultComboBoxModel1.addElement( "times per Hour" );
 		cbRepeaterMode.setModel( defaultComboBoxModel1 );
 		cbRepeaterMode.setSelectedIndex( 0 );
-		repeaterPanel.add( cbRepeaterMode, new GridConstraints( 0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false ) );
+		repeaterPanel.add( cbRepeaterMode );//, new GridConstraints( 0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false ) );
 		chkRepeaterEnabled = new JCheckBox();
 		chkRepeaterEnabled.setText( "Enabled" );
-		repeaterPanel.add( chkRepeaterEnabled, new GridConstraints( 1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false ) );
+		repeaterPanel.add( chkRepeaterEnabled );//, new GridConstraints( 1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false ) );
 		commandPanel = new JPanel();
-		commandPanel.setLayout( new GridLayoutManager( 1, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
-		repeaterPanel.add( commandPanel, new GridConstraints( 2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false ) );
+//		commandPanel.setLayout( new GridLayoutManager( 1, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
+//		commandPanel.setLayout( new BoxLayout(repeaterPanel, BoxLayout.Y_AXIS) );;
+		repeaterPanel.add( commandPanel );//, new GridConstraints( 2, 0, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false ) );
 		lbCommand = new JLabel();
 		lbCommand.setText( "Command :" );
-		commandPanel.add( lbCommand, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false ) );
+		commandPanel.add( lbCommand );//, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false ) );
 
 
 		repeatingTask = new RepeatingTimerTask();
@@ -150,6 +149,8 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 
 
 		MainForm.tableModel.addTableModelListener( this );
+
+		setInnerComponent( repeaterPanel );
 	}
 
 

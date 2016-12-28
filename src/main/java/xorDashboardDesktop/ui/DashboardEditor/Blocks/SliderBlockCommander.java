@@ -1,7 +1,6 @@
 package xorDashboardDesktop.ui.DashboardEditor.Blocks;
 
 import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.AbstractBlockIndicator;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
@@ -22,11 +21,6 @@ import static xorDashboardDesktop.ui.MainForm.serial;
  */
 public class SliderBlockCommander extends AbstractBlockIndicator implements Serializable {
 
-
-
-
-
-
 //	private transient Slider slider = null;
 	private double sliderLastVal = 0.0f;
 
@@ -36,20 +30,28 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 	private JLabel lbTitle;
 	private String unitString;
 
-  @Override
-  public ControlProperties getDefaultProperties() {
-    ControlProperties def;
-    def = super.getDefaultProperties();
 
-    def.setPropertyValue ( "Name", "SliderCommander#"+instancesCount );
-    def.setPropertyValue ( "componentClassName", "SliderBlockCommander" );
-    def.setPropertyValue ( "Title", "SliderCommander" );
-    def.setPropertyValue ( "Border", "false" );
 
-	  def.setPropertyValue( "ControlPropertiesMax", "5" );
+	@Override
+	public void applyControlProperties () {
+		unitString = controlProperties.getPropertyValue( "Units" );
 
-    return def;
-  }
+		slider.setMinimum( Float.valueOf( controlProperties.getPropertyValue( "MinVal" ) ).intValue() );
+		slider.setMaximum( Float.valueOf( controlProperties.getPropertyValue( "MaxVal" ) ).intValue() );
+
+		lbTitle.setText( uiProperties.getPropertyValue( "Title" ) );
+		lbValue.setText( "Value : " + slider.getValue() + " "  + unitString );
+
+		int majTickSpc = slider.getMaximum() / 10 * 2; // 10
+		int minTickSpc = 2;//majTickSpc / 5;
+
+		slider.setMinorTickSpacing( minTickSpc );
+		slider.setMajorTickSpacing( majTickSpc );
+		slider.setPaintTicks( true );
+		slider.setPaintLabels( true );
+	}
+
+
 
 
 	@Override
@@ -57,7 +59,10 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 		super.createInnerComponent();
 
 		sliderPanel = new JPanel();
-		sliderPanel.setLayout( new GridLayoutManager( 3, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
+//		sliderPanel.setLayout( new GridLayoutManager( 3, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
+//		Attribute.Layout.class.
+		sliderPanel.setLayout( new BoxLayout(sliderPanel, BoxLayout.Y_AXIS) );
+//		sliderPanel.setLayout( new BasicSplitPaneUI.BasicVerticalLayoutManager() );//new GridLayoutManager( 3, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
 		lbValue = new JLabel();
 		sliderPanel.add( lbValue, new GridConstraints( 2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension( -1, 16 ), new Dimension( -1, 16 ), null, 0, false ) );
 		lbTitle = new JLabel();
@@ -79,6 +84,7 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 			}
 		} );
 		MainForm.tableModel.addTableModelListener( this );
+		setInnerComponent( sliderPanel );
 	}
 
 
@@ -147,23 +153,20 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 
 
 	@Override
-	public void applyControlProperties () {
-		unitString = controlProperties.getPropertyValue( "Units" );
+	public ControlProperties getDefaultProperties() {
+		ControlProperties def;
+		def = super.getDefaultProperties();
 
-		slider.setMinimum( Float.valueOf( controlProperties.getPropertyValue( "MinVal" ) ).intValue() );
-		slider.setMaximum( Float.valueOf( controlProperties.getPropertyValue( "MaxVal" ) ).intValue() );
+		def.setPropertyValue ( "Name", "SliderCommander#"+instancesCount );
+		def.setPropertyValue ( "componentClassName", "SliderBlockCommander" );
+		def.setPropertyValue ( "Title", "SliderCommander" );
+		def.setPropertyValue ( "Border", "false" );
 
-		lbTitle.setText( uiProperties.getPropertyValue( "Title" ) );
-		lbValue.setText( "Value : " + slider.getValue() + " "  + unitString );
+		def.setPropertyValue( "ControlPropertiesMax", "5" );
 
-		int majTickSpc = slider.getMaximum() / 10 * 2; // 10
-		int minTickSpc = 2;//majTickSpc / 5;
-
-		slider.setMinorTickSpacing( minTickSpc );
-		slider.setMajorTickSpacing( majTickSpc );
-		slider.setPaintTicks( true );
-		slider.setPaintLabels( true );
+		return def;
 	}
+
 
 
 }

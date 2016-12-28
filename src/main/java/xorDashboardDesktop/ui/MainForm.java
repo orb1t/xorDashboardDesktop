@@ -186,7 +186,7 @@ public class MainForm extends JFrame {
 
 		dashboardEditorContainer = new JPanel();
 		dashboardEditorContainer.setLayout( new GridLayoutManager( 1, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
-		dashboardEditorContainer.setPreferredSize( new Dimension( -1, 400 ) );
+		dashboardEditorContainer.setPreferredSize( new Dimension( -1, 800 ) );
 
 //		dashboardPanel.setVisible( true );
 		dashboardEditorContainer.add( dashboardPanel, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false ) );
@@ -250,7 +250,7 @@ public class MainForm extends JFrame {
 		splitDashboard_Serial.setOrientation( 0 );
 		splitDashboard_Serial.setResizeWeight( 1.0 );
 		panelBottomMain.add( splitDashboard_Serial, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension( -1, 400 ), null, 0, false ) );
-		dashboardEditorContainer.setPreferredSize( new Dimension( -1, 400 ) );
+		dashboardEditorContainer.setPreferredSize( new Dimension( -1, 800 ) );
 		splitDashboard_Serial.setLeftComponent( dashboardEditorContainer );
 		panelBottomSerial = new JPanel();
 		panelBottomSerial.setLayout( new GridLayoutManager( 2, 2, new Insets( 0, 0, 0, 0 ), -1, -1 ) );

@@ -69,7 +69,7 @@ createInnerComponent();
 		for ( ControlPropertyItem itm : this.controlProperties.getProperties()) {
 			//TODO: !!!
 
-			resSrt = itm.getName() + " = " + ((ArrayList) MainForm.tableModel.values.get( MainForm.tableModel.values.size() - 1 )).get( MainForm.tableModel.getHeaders().indexOf( itm.getValue( 0 ) ) );
+			resSrt = itm. getValue( 0 )/* getName()*/ + " = " + ((ArrayList) MainForm.tableModel.values.get( MainForm.tableModel.values.size() - 1 )).get( MainForm.tableModel.getHeaders().indexOf( itm.getValue( 0 ) ) );
 			((JTextArea)getInnerComponent()).append( "\n" + resSrt );
 		}
 //		((JTextArea)getInnerComponent()).setText( resSrt );

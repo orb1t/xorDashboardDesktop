@@ -126,7 +126,7 @@
                       <splitpane position="left"/>
                     </constraints>
                     <properties>
-                      <preferredSize width="-1" height="400"/>
+                      <preferredSize width="-1" height="800"/>
                     </properties>
                     <border type="none"/>
                     <children/>

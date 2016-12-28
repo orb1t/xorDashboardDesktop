@@ -15,7 +15,6 @@
     <orderEntry type="library" name="RXTXcomm" level="project" />
     <orderEntry type="library" name="G" level="project" />
     <orderEntry type="library" name="nicenumbers" level="project" />
-    <orderEntry type="library" name="Maven: eu.hansolo:SteelSeries:3.9.13" level="project" />
     <orderEntry type="library" name="Maven: com.github.insubstantial:trident:6.3" level="project" />
   </component>
 </module>

@@ -107,7 +107,7 @@ public abstract class AbstractBlock extends ResizableComponentWrapper implements
 
     if ( null != uiProperties ) {
       this.setName( uiProperties.getPropertyValue("Name"));
-      this.panelContentBlock.setName( uiProperties.getPropertyValue("Name") + "Content");
+//      this.panelContentBlock.setName( uiProperties.getPropertyValue("Name") + "Content");
 
 
         Border brd = this.getBorder();
@@ -132,7 +132,7 @@ public abstract class AbstractBlock extends ResizableComponentWrapper implements
 
   public void setUiProperties ( ControlProperties newProperties) {
     this.uiProperties = newProperties;
-//	  applyUiProperties();
+	  applyUiProperties();
     this.revalidate();
     this.repaint();
   }
