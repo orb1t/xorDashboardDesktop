@@ -2,14 +2,17 @@ package xorDashboardDesktop.ui.DashboardEditor.Blocks;
 
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.AbstractBlockComander;
 import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.EBlockType;
+import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlProperties;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.ControlPropertyItem;
 import xorDashboardDesktop.ui.DashboardEditor.ControlProperties.EControlPropertyItemType;
-import xorDashboardDesktop.ui.DashboardEditor.Blocks.Proto.ResizableComponent.ResizableComponentWrapper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import static xorDashboardDesktop.ui.MainForm.serial;
 
 /**
  * Created by orb1t_ua on 08.10.16.
@@ -17,8 +20,42 @@ import java.io.Serializable;
 public class ButtonBlockComander extends AbstractBlockComander  implements Serializable {
 
 	private int propNumIdx = 0;
+	private int cmdNextIdx = 0;
+	private ArrayList cmds = new ArrayList(  );
+	private boolean initialized = false;
 
-  @Override
+
+	@Override
+	public void createInnerComponent () {
+		super.createInnerComponent();
+
+		JButton newBtn = new JButton(  );
+
+//		Collections.addAll(cmds, fieldParams.commands.split(";"));
+
+		if ( cmds.size() >= 1 )
+			initialized = true;
+
+		setInnerComponent ( newBtn );
+		((JButton)getInnerComponent()).addActionListener( this );
+	}
+
+
+	@Override
+	public void actionPerformed ( ActionEvent actionEvent ) {
+
+		if ( this.controlProperties.getProperties().size() > 0 ) {
+			if ( propNumIdx > this.controlProperties.getProperties().size()-1 )
+				propNumIdx = 0;
+			System.out.println( "actionEvent = [" + propNumIdx + "] : " + this.controlProperties.getProperties().get( propNumIdx ).getValue() + "\n" + actionEvent );
+			// TODO: write this.controlProperties.getProperties().get( propNumIdx ).getValue() to Serial!
+			if ( null != serial && serial.connected )
+				serial.serialWrite ( this.controlProperties.getProperties().get( propNumIdx ).getValue() + "\r\n");
+			propNumIdx++;
+		}
+	}
+
+	@Override
   public ControlProperties getDefaultProperties() {
     ControlProperties def;
     def = super.getDefaultProperties();
@@ -74,23 +111,5 @@ public class ButtonBlockComander extends AbstractBlockComander  implements Seria
 		super.applyControlProperties();
 	}
 
-	@Override
-	public void createInnerComponent () {
-		super.createInnerComponent();
-		setInnerComponent ( new JButton( uiProperties.getPropertyValue("Title")) );
-		((JButton)getInnerComponent()).addActionListener( this );
-	}
 
-
-	@Override
-	public void actionPerformed ( ActionEvent actionEvent ) {
-
-		if ( this.controlProperties.getProperties().size() > 0 ) {
-			if ( propNumIdx > this.controlProperties.getProperties().size()-1 )
-				propNumIdx = 0;
-			System.out.println( "actionEvent = [" + propNumIdx + "] : " + this.controlProperties.getProperties().get( propNumIdx ).getValue() + "\n" + actionEvent );
-			// TODO: write this.controlProperties.getProperties().get( propNumIdx ).getValue() to Serial!
-			propNumIdx++;
-		}
-	}
 }

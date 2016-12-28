@@ -3,6 +3,7 @@ package xorDashboardDesktop.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import xorDashboardDesktop.helpers.serial.SerialReader;
 import xorDashboardDesktop.models.TestStandStrPktDefs;
 import xorDashboardDesktop.models.pktTableModel;
 import xorDashboardDesktop.ui.DashboardEditor.Panel.DashboardPanel;
@@ -31,7 +32,7 @@ public class MainForm extends JFrame {
 	private JPanel panelBottomMain;
 	private JSplitPane splitConnection_Main;
 	private JTextArea txSerialLog;
-	private JTextField txSerialSend;
+	private JTextField txSerialInput;
 	private JButton sendButton;
 	private JScrollPane scrolSerialLog;
 	private JSplitPane splitDashboard_Serial;
@@ -40,6 +41,7 @@ public class MainForm extends JFrame {
 	private JButton a100pktTblRowsButton;
 
 	public static final pktTableModel tableModel = new pktTableModel( new TestStandStrPktDefs() );
+	public static SerialReader serial;
 
 	public static void toggle ( JSplitPane sp, boolean collapse ) {
 		try {
@@ -70,7 +72,6 @@ public class MainForm extends JFrame {
 		this.setPreferredSize( this.getPreferredSize() ); //new Dimension(600, 600));
 
 
-
 		switchSerialPanel( false );
 
 
@@ -82,6 +83,10 @@ public class MainForm extends JFrame {
 
 				switchSerialPanel( true );
 
+//				txSerialLog.append( "test\n" );
+
+
+				serial = new SerialReader( txConnectionPath.getText(), Integer.valueOf( cbSerialSpeed.getSelectedItem().toString() ), txSerialLog );
 
 				if ( splitConnection_Main.getLeftComponent().isVisible() ) {
 					splitConnection_Main.setDividerLocation( 0.0 );
@@ -136,6 +141,14 @@ public class MainForm extends JFrame {
 
 		setVisible( true );
 
+		sendButton.addActionListener( new ActionListener() {
+			@Override
+			public void actionPerformed ( ActionEvent actionEvent ) {
+				if ( serial != null )
+					serial.serialWrite( txSerialInput.getText() + "\r\n" );
+				txSerialInput.setText( "" );
+			}
+		} );
 	}
 
 	private void addPktTblRow () {
@@ -160,8 +173,8 @@ public class MainForm extends JFrame {
 			this.splitDashboard_Serial.setDividerLocation( this.splitDashboard_Serial.getLastDividerLocation() );
 		else
 			this.splitDashboard_Serial.setDividerLocation( 1.0d );
-		txSerialSend.setEnabled( on );
-		txSerialSend.setEditable( on );
+		txSerialInput.setEnabled( on );
+		txSerialInput.setEditable( on );
 		sendButton.setEnabled( on );
 	}
 
@@ -231,12 +244,12 @@ public class MainForm extends JFrame {
 		panelBottomMain.setLayout( new GridLayoutManager( 1, 1, new Insets( 0, 0, 0, 0 ), -1, -1 ) );
 		splitConnection_Main.setRightComponent( panelBottomMain );
 		splitDashboard_Serial = new JSplitPane();
-		splitDashboard_Serial.setDividerLocation( 455 );
+		splitDashboard_Serial.setDividerLocation( 393 );
 		splitDashboard_Serial.setLastDividerLocation( -1 );
 		splitDashboard_Serial.setOneTouchExpandable( true );
 		splitDashboard_Serial.setOrientation( 0 );
 		splitDashboard_Serial.setResizeWeight( 1.0 );
-		panelBottomMain.add( splitDashboard_Serial, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension( -1, 400 ), null, 0, false ) );
+		panelBottomMain.add( splitDashboard_Serial, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension( -1, 400 ), null, 0, false ) );
 		dashboardEditorContainer.setPreferredSize( new Dimension( -1, 400 ) );
 		splitDashboard_Serial.setLeftComponent( dashboardEditorContainer );
 		panelBottomSerial = new JPanel();
@@ -245,21 +258,21 @@ public class MainForm extends JFrame {
 		panelBottomSerial.setPreferredSize( new Dimension( -1, -1 ) );
 		panelBottomSerial.setVisible( true );
 		splitDashboard_Serial.setRightComponent( panelBottomSerial );
-		txSerialSend = new JTextField();
-		txSerialSend.setDragEnabled( false );
-		txSerialSend.setEnabled( false );
-		panelBottomSerial.add( txSerialSend, new GridConstraints( 1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension( 150, -1 ), null, 0, false ) );
+		txSerialInput = new JTextField();
+		txSerialInput.setDragEnabled( false );
+		txSerialInput.setEnabled( false );
+		panelBottomSerial.add( txSerialInput, new GridConstraints( 0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension( 150, -1 ), null, 1, false ) );
 		sendButton = new JButton();
 		sendButton.setEnabled( false );
 		sendButton.setText( "Send" );
-		panelBottomSerial.add( sendButton, new GridConstraints( 1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false ) );
+		panelBottomSerial.add( sendButton, new GridConstraints( 0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, 1, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false ) );
 		scrolSerialLog = new JScrollPane();
+		scrolSerialLog.setAutoscrolls( false );
+		scrolSerialLog.setDoubleBuffered( true );
+		scrolSerialLog.setHorizontalScrollBarPolicy( 30 );
 		scrolSerialLog.setVerticalScrollBarPolicy( 22 );
-		panelBottomSerial.add( scrolSerialLog, new GridConstraints( 0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, new Dimension( -1, 32 ), new Dimension( -1, 32 ), null, 0, false ) );
+		panelBottomSerial.add( scrolSerialLog, new GridConstraints( 1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension( -1, 32 ), new Dimension( -1, 32 ), null, 0, false ) );
 		txSerialLog = new JTextArea();
-		txSerialLog.setEditable( false );
-		txSerialLog.setMinimumSize( new Dimension( -1, 10 ) );
-		txSerialLog.setPreferredSize( new Dimension( -1, 16 ) );
 		scrolSerialLog.setViewportView( txSerialLog );
 	}
 

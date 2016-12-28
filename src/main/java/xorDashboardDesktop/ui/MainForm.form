@@ -107,12 +107,12 @@
             <children>
               <splitpane id="e958f" binding="splitDashboard_Serial">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
                     <preferred-size width="-1" height="400"/>
                   </grid>
                 </constraints>
                 <properties>
-                  <dividerLocation value="455"/>
+                  <dividerLocation value="393"/>
                   <lastDividerLocation value="-1"/>
                   <oneTouchExpandable value="true"/>
                   <orientation value="0"/>
@@ -143,9 +143,9 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="5fad2" class="javax.swing.JTextField" binding="txSerialSend">
+                      <component id="5fad2" class="javax.swing.JTextField" binding="txSerialInput">
                         <constraints>
-                          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="1" indent="1" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
                           </grid>
                         </constraints>
@@ -156,7 +156,7 @@
                       </component>
                       <component id="2081" class="javax.swing.JButton" binding="sendButton" default-binding="true">
                         <constraints>
-                          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="1" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
                           <enabled value="false"/>
@@ -165,23 +165,22 @@
                       </component>
                       <scrollpane id="959cd" binding="scrolSerialLog">
                         <constraints>
-                          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
                             <minimum-size width="-1" height="32"/>
                             <preferred-size width="-1" height="32"/>
                           </grid>
                         </constraints>
                         <properties>
+                          <autoscrolls value="false"/>
+                          <doubleBuffered value="true"/>
+                          <horizontalScrollBarPolicy value="30"/>
                           <verticalScrollBarPolicy value="22"/>
                         </properties>
                         <border type="none"/>
                         <children>
-                          <component id="3faac" class="javax.swing.JTextArea" binding="txSerialLog">
+                          <component id="646ab" class="javax.swing.JTextArea" binding="txSerialLog">
                             <constraints/>
-                            <properties>
-                              <editable value="false"/>
-                              <minimumSize width="-1" height="10"/>
-                              <preferredSize width="-1" height="16"/>
-                            </properties>
+                            <properties/>
                           </component>
                         </children>
                       </scrollpane>

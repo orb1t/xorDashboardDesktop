@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.Timer;
 
+import static xorDashboardDesktop.ui.MainForm.serial;
+
 /**
  * Created by orb1t_ua on 08.10.16.
  */
@@ -37,6 +39,7 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 	private int cmdNumOffset = 0;
 	private long repeatingTaskPeriod = 1000;
 	private String unitString;
+	private int propNumIdx;
 
 	class RepeatingTimerTask extends TimerTask {
 		@Override
@@ -47,6 +50,8 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 					cmdNumIdx = 0;
 				System.out.println( "actionEvent = [" + cmdNumIdx + "] : " + controlProperties.getProperties().get( cmdNumIdx + cmdNumOffset ).getValue() + "\n" );
 				// TODO: write this.controlProperties.getProperties().get( cmdNumIdx ).getValue() to Serial!
+				if ( null != serial && serial.connected )
+					serial.serialWrite ( controlProperties.getProperties().get( cmdNumIdx + cmdNumOffset ).getValue() + "\r\n");
 				cmdNumIdx++;
 			}
 		}
@@ -118,6 +123,15 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 //					System.out.println( "ChangeEvent = [ " + controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) + "\n" + e );
 //					// TODO: write this.controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) to Serial!
 //				}
+				if ( controlProperties.getProperties().size() > 0 ) {
+					if ( propNumIdx > controlProperties.getProperties().size()-1 )
+						propNumIdx = 0;
+					System.out.println( "actionEvent = [" + propNumIdx + "] : " + controlProperties.getProperties().get( propNumIdx ).getValue() + "\n" );// + actionEvent );
+					// TODO: write this.controlProperties.getProperties().get( propNumIdx ).getValue() to Serial!
+					if ( null != serial && serial.connected )
+						serial.serialWrite ( controlProperties.getProperties().get( propNumIdx ).getValue() + "\r\n");
+					propNumIdx++;
+				}
 			}
 		} );
 
@@ -170,14 +184,14 @@ public class RepeatingBlockCommander extends AbstractBlockIndicator implements S
 
 		ControlPropertyItem res = new ControlPropertyItem( "MinVal", EControlPropertyItemType.FLT, "0" );
 	controlProperties.setProperty( res );
-	res = new ControlPropertyItem( "MaxVal", EControlPropertyItemType.FLT, "1000" );
+	res = new ControlPropertyItem( "MaxVal", EControlPropertyItemType.FLT, "60" );
 	controlProperties.setProperty( res );
-		res = new ControlPropertyItem( "DefVal", EControlPropertyItemType.FLT, "500" );
+		res = new ControlPropertyItem( "DefVal", EControlPropertyItemType.FLT, "1.5" );
 		controlProperties.setProperty( res );
-		res = new ControlPropertyItem( "StepVal", EControlPropertyItemType.FLT, "1" );
+		res = new ControlPropertyItem( "StepVal", EControlPropertyItemType.FLT, "0.5" );
 		controlProperties.setProperty( res );
 
-		res = new ControlPropertyItem( "Units", EControlPropertyItemType.LST, "Hz;Hz;kHz;times per Second;times per Minute;times per Hour" );
+		res = new ControlPropertyItem( "Units", EControlPropertyItemType.LST, "Hz;Hz;kHz;");//times per Second;times per Minute;times per Hour" );
 		controlProperties.setProperty( res );
 
 //		res = new ControlPropertyItem( "Command", EControlPropertyItemType.STR, "cmd $VAL" );

@@ -61,8 +61,8 @@ public class SerialReader implements Serializable, SerialPortEventListener {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
               int len = 0;
-              int data;
-              while ( ( data = input.read()) > -1 )
+              char data;
+              while ( ( data = (char) input.read() ) > -1 )
               {
                 if ( data == '\n' ) {
                   break;
@@ -71,10 +71,10 @@ public class SerialReader implements Serializable, SerialPortEventListener {
               }
               for ( int i = len; i < PAYLOAD_PKT_SIZE; i++ )
                 payloadPacket [ i ] = ' ';
-//              _logg.append(String.valueOf(payloadPacket) + "\n");
+	              _logg.append(String.valueOf(payloadPacket) + "\n");
               TestStandStrPktParser.parseStrPkt ( String.valueOf(payloadPacket), this._logg);
             } catch (Exception e) {
-//                System.err.println(e.toString());
+                System.err.println(e.toString());
               e.printStackTrace();
             }
         }

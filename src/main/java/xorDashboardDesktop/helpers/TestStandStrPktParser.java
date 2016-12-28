@@ -1,10 +1,10 @@
 package xorDashboardDesktop.helpers;
 
 //import orImuClient.imu.accelCalibration;
-import xorDashboardDesktop.models.pktTableModel;
-
 import javax.swing.*;
 import java.io.Serializable;
+
+import static xorDashboardDesktop.ui.MainForm.tableModel;
 
 //import orImuClient.ui.forms.formMain;
 //import toxi.geom.Quaternion;
@@ -32,49 +32,49 @@ public class TestStandStrPktParser implements Serializable {
   static int relSts1 = 0;
   private static JTextArea _logg;
 
-  static pktTableModel model;
+//  static pktTableModel model;
 
 
   public  static void parseStrPkt ( String strPkt, JTextArea logg ) {
     _logg = logg;
     String[] msg = strPkt.split(",");
     if ( ( msg != null ) && ( ( msg.length == SERIAL_VALS_CNT ))){
-      model.prepareNewRow();
+	    tableModel.prepareNewRow();
       for ( int i=0; i< msg.length; i++ ) {
         value[i] =  Float.valueOf(msg[i]).shortValue();
         value_raw [i] = Float.valueOf(msg[i]);
       }
 
       pktsCnt = value [ 0 ];
-      model.newRowTmp.add ( pktsCnt );
-      model.setMaxValueOf(0, pktsCnt);
+	    tableModel.newRowTmp.add ( pktsCnt );
+	    tableModel.setMaxValueOf(0, pktsCnt);
 
       deltaT = value [ 1 ];
-      model.newRowTmp.add ( deltaT );
+	    tableModel.newRowTmp.add ( deltaT );
 //      model.setMaxValueOf(0, pktsCnt);
 
       flowMetterFlowRate = value_raw [ 2 ];
-      model.newRowTmp.add ( flowMetterFlowRate );
+	    tableModel.newRowTmp.add ( flowMetterFlowRate );
       flowMetterFlowMilliLitres   = value_raw [ 3 ];
-      model.newRowTmp.add ( flowMetterFlowMilliLitres );
+	    tableModel.newRowTmp.add ( flowMetterFlowMilliLitres );
       flowMetterTotalMilliLitres  = value_raw [ 4 ];
-      model.newRowTmp.add ( flowMetterTotalMilliLitres );
+	    tableModel.newRowTmp.add ( flowMetterTotalMilliLitres );
 
       analogPotVal = value_raw [ 5 ];
-      model.newRowTmp.add ( analogPotVal );
+	    tableModel.newRowTmp.add ( analogPotVal );
       servoPosVal = value_raw [ 6 ];
-      model.newRowTmp.add ( servoPosVal );
+	    tableModel.newRowTmp.add ( servoPosVal );
 
       relSts0 = value [ 7 ];
-      model.newRowTmp.add ( relSts0 );
+	    tableModel.newRowTmp.add ( relSts0 );
       relSts1 = value [ 8 ];
-      model.newRowTmp.add ( relSts1 );
+	    tableModel.newRowTmp.add ( relSts1 );
 
       _logg.append("[" + pktsCnt + ":" + deltaT + "] rate: "+flowMetterFlowRate+" l/m, flow: "+flowMetterFlowMilliLitres+" ml/s, ttl: "+flowMetterTotalMilliLitres+" ml | "
                         +"pot: " + analogPotVal + ", srv: " + servoPosVal + " | "
                         +"rl0: "+relSts0+", rl1: "+relSts1 + "\n");
 
-      model.addRow(model.newRowTmp);
+	    tableModel.addRow(tableModel.newRowTmp);
     }
   }
 

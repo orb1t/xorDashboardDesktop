@@ -15,6 +15,8 @@ import javax.swing.event.TableModelEvent;
 import java.awt.*;
 import java.io.Serializable;
 
+import static xorDashboardDesktop.ui.MainForm.serial;
+
 /**
  * Created by orb1t_ua on 08.10.16.
  */
@@ -69,6 +71,10 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 				int value = (int) source.getValue();
 				lbValue.setText( "Value : " + value + " " + unitString );
 					System.out.println( "ChangeEvent = [ " + controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) + " ]\n" + e );
+
+				if ( null != serial && serial.connected )
+					serial.serialWrite ( controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) + "\r\n");
+
 //					// TODO: write this.controlProperties.getPropertyValue("Command").replace( "$VAL", String.valueOf( value ) ) to Serial!
 			}
 		} );
@@ -122,6 +128,10 @@ public class SliderBlockCommander extends AbstractBlockIndicator implements Seri
 				sliderLastVal = slider.getValue();
 				slider.setValue( (int) tmp );
 				System.out.println( "tableModelEvent = [" + tmp + "]" );
+
+//				if ( null != serial && serial.connected )
+//					serial.serialWrite ( this.controlProperties.getProperties().get( propNumIdx ).getValue() + "\r\n");
+
 				applyControlProperties ();
 			}
 		}
